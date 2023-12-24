@@ -1,8 +1,7 @@
 # импорты
 import tkinter as tk
 import time
-import menu_template
-import os
+import player_movement_test
 
 class Main():
     # переменные
@@ -14,7 +13,7 @@ class Main():
         # конфиг win
         self.win.geometry("1200x800")
         self.win.title("Dungeons mines")
-        self.win["bg"] = "black"
+        self.win.config(bg = "black", cursor="none")
         self.win.attributes("-fullscreen", self.fullscreen)
         try:
             self.win.iconbitmap()
@@ -36,5 +35,5 @@ class Main():
 
 if __name__ == "__main__":
     main_session = Main()
-    current_menu = menu_template.MenuTemplate(main_session.win)
+    current_menu = player_movement_test.Menu(main_session.win)
     main_session.cycle()
