@@ -20,9 +20,12 @@ class Menu(menu_template.MenuTemplate):
             self.move_player("sisi")
 
         # планове перемещение камеры
-        self.c.place(x=round(self.c.winfo_x()-(self.win.winfo_width()/(self.camera_smooth*2)) + (-self.c.coords(self.player)[0]-self.c.winfo_x()+self.win.winfo_width())/(self.camera_smooth)),
-                     y=round(self.c.winfo_y()-self.win.winfo_height()/(self.camera_smooth*2) + (-self.c.coords(self.player)[1]-self.c.winfo_y())/self.camera_smooth + self.win.winfo_height()/self.camera_smooth), 
+        self.c.place(x=self.c.winfo_x()-self.win.winfo_width()//2+(-self.c.coords(self.player)[0]-(self.c.winfo_x()-self.win.winfo_width()//2))//self.camera_smooth+self.win.winfo_width()//2,
+                     y=self.c.winfo_y()-self.win.winfo_height()//2+(-self.c.coords(self.player)[1]-(self.c.winfo_y()-self.win.winfo_height()//2))//self.camera_smooth+self.win.winfo_height()//2, 
                      anchor="nw")
+        # self.c.place(x=round(self.c.winfo_x()-(self.win.winfo_width()/(self.camera_smooth*2)) + (-self.c.coords(self.player)[0]-self.c.winfo_x()+self.win.winfo_width())/(self.camera_smooth)),
+        #              y=round(self.c.winfo_y()-self.win.winfo_height()/(self.camera_smooth*2) + (-self.c.coords(self.player)[1]-self.c.winfo_y())/self.camera_smooth + self.win.winfo_height()/self.camera_smooth), 
+        #              anchor="nw")
 
         # курсор
         self.create_cursor(self.cur_x, self.cur_y)
@@ -40,7 +43,7 @@ class Menu(menu_template.MenuTemplate):
             self.player_x_movement = round((self.player_speed/self.player_vector)*self.player_to_cur_distance_x)
             self.player_y_movement = round((self.player_speed/self.player_vector)*self.player_to_cur_distance_y)
         else:
-            self.player_x_movement, self.player_y_movement = 0
+            self.player_x_movement, self.player_y_movement = 0, 0
 
         # само перемещение
         self.c.move(self.player, self.player_x_movement, self.player_y_movement)
